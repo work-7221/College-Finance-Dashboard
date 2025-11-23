@@ -1,4 +1,26 @@
 import streamlit as st
+import mysql.connector as ms
+
+connection = ms.connect(
+    user = "root",
+    password = "mysql@123",
+    host = "localhost",
+    database = "id_1"
+)
+
+cursor = connection.cursor()
+
+cursor.execute("select * from settings")
+
+content = cursor.fetchall()
+
+st.write(content)
+
+
+name = content[0][0]
+college = content[0][1]
+enrol = content[0][2]
+sql_budget = content[0][3]
 
 st.title("⚙️Settings")
 
@@ -12,20 +34,27 @@ with col1:
 
 settings_expander = st.expander("Budget")
 
-some_var = f"₹0 per month"
+some_var = f"₹{sql_budget} per month"
 
 with settings_expander:
-    # st.checkbox("Hello")
-    budget = st.text_input("Enter Budget: ",
-                           key = "budget input")
-    the_budget = st.session_state["budget input"]
+    budget = st.text_input("Enter Budget:", key="budget_input")
+    the_budget = st.session_state.get("budget_input", "")
 
-    save = st.button("save budget")
+    save = st.button("Save Budget")
     if save:
-        some_var = f"₹{the_budget} per month"
+        if the_budget.isdigit():
+            cursor.execute(
+                "UPDATE settings SET budget = %s WHERE enrolment_number = %s",
+                (int(the_budget), enrol)
+            )
+            connection.commit()
+            some_var = f"₹{the_budget} per month"
+            st.success("Budget updated!")
+        else:
+            st.error("Please enter a valid number.")
 
 with col2:
-    st.subheader("Rohan Kumar Maharana")
-    st.subheader("Bennett University")
-    st.subheader(" S25CSEU1504")
+    st.subheader(f"{name}")
+    st.subheader(f"{college}")
+    st.subheader(f"{enrol}")
     budget_label = st.subheader(some_var)
