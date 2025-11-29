@@ -22,7 +22,7 @@ cursor.execute(
     (str(selected_date),)
 )
 result = cursor.fetchone()
-st.write(selected_date)
+# st.write(selected_date)
 
 if result is None:
     st.info("No expenses recorded for this date.")

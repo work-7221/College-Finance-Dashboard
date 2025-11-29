@@ -66,7 +66,7 @@ another_dict = {
 
 
 if submit_button:
-    st.write(st.session_state)
+    # st.write(st.session_state)
     for i in st.session_state:
         if "input" in i:
             D.update({i : st.session_state[i]})
@@ -105,8 +105,8 @@ for element in online:
 
 
 
-st.write(D)
-st.write(another_dict)
+# st.write(D)
+# st.write(another_dict)
 
 months = {
     1:"January",
@@ -128,10 +128,10 @@ if submit_button:
     cursor.execute(f"INSERT INTO expense_records_essentials(stationary, other) values{tuple(another_dict["essentials"])}")
     cursor.execute(f"INSERT INTO expense_records_other_expenses(recharge, subscriptions, online_purchases) values{tuple(another_dict["others"])}")
 
-    st.write((the_date).month)
-    st.write((the_date).year)
-    st.write((the_date).year)
-    st.write(type(the_date))
+    # st.write((the_date).month)
+    # st.write((the_date).year)
+    # st.write((the_date).year)
+    # st.write(type(the_date))
     # month_number = eval(date_formatted[1])
 
     # cursor.execute(f"INSERT INTO expense_records(date, month, essentials, other_expenses, total) values({the_date, months[the_date.month]}, st.session_state[])")
@@ -179,17 +179,20 @@ if submit_button:
 
     cursor.execute(query, data)
     connection.commit()
-    st.write(the_date)
-    print(the_date)
-    st.write(food_sum)
-    st.write(essentials_sum)
-    st.write(other_expenses_sum)
+    # st.write(the_date)
+    # print(the_date)
+    # st.write(food_sum)
+    # st.write(essentials_sum)
+    # st.write(other_expenses_sum)
 
 
 if total != 0:
+    col1, col2 = st.columns(2)
+    with col1: 
+        st.header(f"Total expenses made on {date}")
+    with col2:
+        st.header(f"₹{total}")
     st.success("Expense saved successfully.")
-    st.header(f"Total expenses made on {date}")
-    st.subheader(f"₹{total}")
     st.balloons()
 
     

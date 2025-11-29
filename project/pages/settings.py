@@ -14,7 +14,7 @@ cursor.execute("select * from settings")
 
 content = cursor.fetchall()
 
-st.write(content)
+# st.write(content)
 
 
 name = content[0][0]

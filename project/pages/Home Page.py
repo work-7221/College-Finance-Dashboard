@@ -47,7 +47,7 @@ with col2:
 
 month_numbers = [x for x in range(1, len(tup) + 1)]
 month_number_selected = month_numbers[tup.index(month_selected)]
-st.write(month_number_selected)
+# st.write(month_number_selected)
 
 query = f"select * from expense_records where YEAR(date) = {year_selected} and MONTH(date) = {month_number_selected}"
 cursor_records_mysql.execute(query)
@@ -61,15 +61,15 @@ for day in all_values_regarding_the_month_and_year:
     essentials_sum += day[3]
     other_expenses_sum += day[4]
 L = [food_sum, essentials_sum, other_expenses_sum]
-st.write(L)
+# st.write(L)
 top_category_index = L.index(max(L))
 names = ["Food", "Essentials", "Other Expenses"]
-st.write(names[top_category_index])
+# st.write(names[top_category_index])
 
 
-st.write(query)
-st.write(all_values_regarding_the_month_and_year)
-st.write(es.totals_sum_w_avg(all_values_regarding_the_month_and_year))
+# st.write(query)
+# st.write(all_values_regarding_the_month_and_year)
+# st.write(es.totals_sum_w_avg(all_values_regarding_the_month_and_year))
 
 col1, col2, col3, col4 = st.columns(4)
 
