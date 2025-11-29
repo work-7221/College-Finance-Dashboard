@@ -2,7 +2,6 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import pandas as pd
 import mysql.connector as ms
-import main_2 as mn_2
 import essentials as es
 
 
@@ -13,6 +12,10 @@ connection_records = ms.connect(
     database = "id_1"
 )
 cursor_records_mysql = connection_records.cursor()
+
+cursor_records_mysql.execute('''Select budget from settings where enrolment_number = "S25CSEU1504"''')
+budget = int(cursor_records_mysql.fetchall()[0][0])
+st.write(budget)
 
 st.title("College Finance Dashboard")
 st.caption("Track your expenses, analyze trends, and save smarter.")
@@ -79,18 +82,17 @@ monthly_avg = es.totals_sum_w_avg(all_values_regarding_the_month_and_year)[1]
 col1.metric("💰 Total Spent", f"₹{monthly_total}")
 col2.metric("📈 Avg Daily", f"₹{monthly_avg}")
 col3.metric("🏆 Top Category", f"{names[top_category_index]}")
-col4.metric("💵 Budget Left", f"₹{40000-monthly_total}")
+col4.metric("💵 Budget Left", f"₹{budget-monthly_total}")
 
-st.write("Monthly budget used")
-progress = monthly_total/40000
-st.progress(progress)
+try:
+    progress = monthly_total/budget
+    st.write("Monthly budget used")
+    st.progress(progress)
+except:
+    st.write("You've already spent over your budget, please ensure that you dont expend more.")
 st.write("Your monthly expense distribution!")
 
-values = [3000, 2500, 4000]
 labels = ["Food", "Essentials", "Other Expenses"]
-
-#creating a piechart
-# Create a figure
 
 
 data = {
