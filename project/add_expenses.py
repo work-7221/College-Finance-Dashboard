@@ -108,20 +108,7 @@ for element in online:
 # st.write(D)
 # st.write(another_dict)
 
-months = {
-    1:"January",
-    2:"February",
-    3:"March",
-    4:"April",
-    5:"May",
-    6:"June",
-    7:"July",
-    8:"August",
-    9:"September",
-    10:"October",
-    11:"November",
-    12:"December"
-}
+
 if submit_button:
     # st.write(f"INSERT INTO expense_records_food(tuck_shop, quench, hotspot, snapeats, paid_mess, bistro, vending_machine) values{tuple(another_dict["food"])};")
     cursor.execute(f"INSERT INTO expense_records_food(tuck_shop, quench, hotspot, snapeats, paid_mess, bistro, vending_machine) values{tuple(another_dict["food"])};")
@@ -134,7 +121,6 @@ if submit_button:
     # st.write(type(the_date))
     # month_number = eval(date_formatted[1])
 
-    # cursor.execute(f"INSERT INTO expense_records(date, month, essentials, other_expenses, total) values({the_date, months[the_date.month]}, st.session_state[])")
     connection.commit()
 
     my_sum = lambda x,y: x+y
