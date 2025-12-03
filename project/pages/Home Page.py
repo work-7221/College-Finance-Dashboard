@@ -15,7 +15,6 @@ cursor_records_mysql = connection_records.cursor()
 
 cursor_records_mysql.execute('''Select budget from settings where enrolment_number = "S25CSEU1504"''')
 budget = int(cursor_records_mysql.fetchall()[0][0])
-st.write(budget)
 
 st.title("College Finance Dashboard")
 st.caption("Track your expenses, analyze trends, and save smarter.")
